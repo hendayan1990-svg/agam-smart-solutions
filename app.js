@@ -1,0 +1,4 @@
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(x=>io.observe(x));
+document.querySelectorAll('[data-count]').forEach(el=>{let done=false;const obs=new IntersectionObserver(es=>{if(es[0].isIntersecting&&!done){done=true;let n=0,t=+el.dataset.count;let id=setInterval(()=>{n+=Math.max(1,Math.ceil(t/45));if(n>=t){n=t;clearInterval(id)}el.textContent=n+'+'},35)}},{threshold:.5});obs.observe(el)});
+document.querySelectorAll('.lead-form').forEach(f=>f.addEventListener('submit',e=>{e.preventDefault();let d=new FormData(f);let s=`שלום AGAM, שם: ${d.get('name')||''}%0Aטלפון: ${d.get('phone')||''}%0Aתחום: ${d.get('service')||''}%0Aפירוט: ${d.get('message')||''}`;location.href='https://wa.me/972559344185?text='+encodeURI(s)}));
