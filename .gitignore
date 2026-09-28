@@ -1,0 +1,8 @@
+edgedebug/
+/*.py
+/check-*.png
+/cdp-*.png
+/preview-*.png
+/ref-*.png
+/mobile-*.png
+/desktop-*.png
