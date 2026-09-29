@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20260929classic7';
+  const VERSION='20260929classic10';
   document.querySelectorAll('link[href*="upgrade.css"],link[href*="mobile-final.css"],link[href*="service-pro.css"]').forEach(l=>l.remove());
   const ensureCss=(href,key)=>{if(!document.querySelector(`link[href*="${key}"]`)){const l=document.createElement('link');l.rel='stylesheet';l.href=href+'?v='+VERSION;document.head.appendChild(l);}};
   ensureCss('classic-fixes.css','classic-fixes.css');
@@ -28,7 +28,12 @@
   }
 
   document.querySelectorAll('img[src*="software-install.svg"]').forEach(img=>{img.src='assets/lab.jpg';img.alt='התקנת Windows, Office, Adobe ותוכנות';});
-  document.querySelectorAll('img').forEach(img=>{if(!img.loading)img.loading='lazy';img.decoding='async';});
+  document.querySelectorAll('img').forEach(img=>{
+    const isHero=img.matches('.desktop-hero .bg,.dept-hero .bg,.about-hero>img,.gallery-hero>img,.contact-hero>img');
+    img.loading=isHero?'eager':'lazy';
+    if(isHero)img.setAttribute('fetchpriority','high');
+    img.decoding='async';
+  });
 
   if(nav&&!nav.querySelector('.mobile-icons')){
     nav.insertAdjacentHTML('beforeend','<div class="mobile-icons"><a class="w" href="https://wa.me/972559344185" aria-label="WhatsApp">✆</a><a class="p" href="tel:0559344185" aria-label="חיוג">☎</a></div>');
