@@ -1,7 +1,9 @@
 (()=>{
-  const VERSION='20260929pro4';
-  if(!document.querySelector('link[href*="mobile-final.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='mobile-final.css?v='+VERSION;document.head.appendChild(l);}
-  if(!document.querySelector('link[href*="upgrade.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='upgrade.css?v='+VERSION;document.head.appendChild(l);}
+  const VERSION='20260929pro5';
+  const ensureCss=(href,key)=>{if(!document.querySelector(`link[href*="${key}"]`)){const l=document.createElement('link');l.rel='stylesheet';l.href=href+'?v='+VERSION;document.head.appendChild(l);}};
+  ensureCss('mobile-final.css','mobile-final.css');
+  ensureCss('upgrade.css','upgrade.css');
+  ensureCss('service-pro.css','service-pro.css');
   document.body.classList.add('agam-pro');
   const path=(location.pathname.split('/').pop()||'index.html').replace('.html','');
   document.body.classList.add('page-'+path);
@@ -22,12 +24,7 @@
 
   const menuBtn=document.querySelector('.hamb');
   const menu=document.querySelector('.menu');
-  if(menuBtn&&menu){
-    menuBtn.setAttribute('aria-expanded','false');
-    menuBtn.addEventListener('click',e=>{e.stopPropagation();const open=menu.classList.toggle('open');menuBtn.classList.toggle('open',open);menuBtn.setAttribute('aria-expanded',String(open));});
-    menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');menuBtn.classList.remove('open');menuBtn.setAttribute('aria-expanded','false')}));
-    document.addEventListener('click',e=>{if(menu.classList.contains('open')&&!menu.contains(e.target)&&!menuBtn.contains(e.target)){menu.classList.remove('open');menuBtn.classList.remove('open');menuBtn.setAttribute('aria-expanded','false')}});
-  }
+  if(menuBtn&&menu){menuBtn.setAttribute('aria-expanded','false');menuBtn.addEventListener('click',e=>{e.stopPropagation();const open=menu.classList.toggle('open');menuBtn.classList.toggle('open',open);menuBtn.setAttribute('aria-expanded',String(open));});menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');menuBtn.classList.remove('open');menuBtn.setAttribute('aria-expanded','false')}));document.addEventListener('click',e=>{if(menu.classList.contains('open')&&!menu.contains(e.target)&&!menuBtn.contains(e.target)){menu.classList.remove('open');menuBtn.classList.remove('open');menuBtn.setAttribute('aria-expanded','false')}});}
 
   document.querySelectorAll('.lead-form').forEach(f=>f.addEventListener('submit',e=>{e.preventDefault();const d=new FormData(f);const txt=`שלום AGAM,%0Aשם: ${encodeURIComponent(d.get('name')||'')}%0Aטלפון: ${encodeURIComponent(d.get('phone')||'')}%0Aתחום: ${encodeURIComponent(d.get('service')||'')}%0Aאזור: ${encodeURIComponent(d.get('area')||'')}%0Aפירוט: ${encodeURIComponent(d.get('message')||'')}`;location.href='https://wa.me/972559344185?text='+txt;}));
 })();
