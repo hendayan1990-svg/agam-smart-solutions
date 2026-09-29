@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='20260929classic10';
+  const VERSION='20260929hero1';
   document.querySelectorAll('link[href*="upgrade.css"],link[href*="mobile-final.css"],link[href*="service-pro.css"]').forEach(l=>l.remove());
   const ensureCss=(href,key)=>{if(!document.querySelector(`link[href*="${key}"]`)){const l=document.createElement('link');l.rel='stylesheet';l.href=href+'?v='+VERSION;document.head.appendChild(l);}};
   ensureCss('classic-fixes.css','classic-fixes.css');
@@ -7,6 +7,29 @@
 
   const path=(location.pathname.split('/').pop()||'index.html').replace('.html','');
   document.body.classList.add('page-'+path);
+
+  if(path==='index'){
+    window.__AGAM_HERO='';
+    const heroParts=[0,1,2,3,4,5];
+    const loadPart=i=>{
+      if(i>=heroParts.length){
+        const hero=document.querySelector('.desktop-hero .bg');
+        if(hero&&window.__AGAM_HERO){
+          hero.src='data:image/webp;base64,'+window.__AGAM_HERO;
+          hero.alt='AGAM – פתרונות חכמים לבית ולעסק';
+          hero.loading='eager';
+          hero.setAttribute('fetchpriority','high');
+        }
+        return;
+      }
+      const s=document.createElement('script');
+      s.src='assets/hero-data-'+heroParts[i]+'.js?v='+VERSION;
+      s.onload=()=>loadPart(i+1);
+      s.onerror=()=>loadPart(i+1);
+      document.head.appendChild(s);
+    };
+    loadPart(0);
+  }
 
   const replacements=[[/GAMING\s*&\s*CUSTOM/gi,'CUSTOM SYSTEMS & CNC'],[/AGAM GAMING/gi,'AGAM CUSTOM SYSTEMS'],[/מחשבי גיימינג/g,'מערכות מחשב'],[/עמדות גיימינג/g,'עמדות מחשב'],[/אביזרי גיימינג/g,'אביזרים וציוד היקפי']];
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;
