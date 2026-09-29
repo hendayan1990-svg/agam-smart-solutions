@@ -1,8 +1,9 @@
 (()=>{
-  const VERSION='20260929classic6';
+  const VERSION='20260929classic7';
   document.querySelectorAll('link[href*="upgrade.css"],link[href*="mobile-final.css"],link[href*="service-pro.css"]').forEach(l=>l.remove());
   const ensureCss=(href,key)=>{if(!document.querySelector(`link[href*="${key}"]`)){const l=document.createElement('link');l.rel='stylesheet';l.href=href+'?v='+VERSION;document.head.appendChild(l);}};
   ensureCss('classic-fixes.css','classic-fixes.css');
+  ensureCss('header-fix.css','header-fix.css');
 
   const path=(location.pathname.split('/').pop()||'index.html').replace('.html','');
   document.body.classList.add('page-'+path);
