@@ -1,5 +1,6 @@
 (()=>{
-  const VERSION='20260929classic1';
+  const VERSION='20260929classic2';
+  document.querySelectorAll('link[href*="upgrade.css"]').forEach(l=>l.remove());
   const ensureCss=(href,key)=>{if(!document.querySelector(`link[href*="${key}"]`)){const l=document.createElement('link');l.rel='stylesheet';l.href=href+'?v='+VERSION;document.head.appendChild(l);}};
   ensureCss('classic-fixes.css','classic-fixes.css');
 
