@@ -30,3 +30,4 @@ body{padding-bottom:72px!important}
 .mobilebar{height:68px!important;padding:8px!important;grid-template-columns:1fr 1.18fr!important;gap:8px!important}.mobilebar a{height:52px!important;font-size:15px!important}
 }
 @media (max-width:420px){.brand-full{width:132px!important}.brand-full img{width:132px!important}.mobile-icons a{width:38px!important;height:38px!important}.hamb{width:42px!important;height:42px!important}.service img,.service.top img{height:112px!important}.dept-brand{font-size:27px!important}.dept-hero h1{font-size:20px!important}}
+/* final deployment marker 2026-09-29 */
